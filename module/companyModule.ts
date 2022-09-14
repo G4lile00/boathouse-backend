@@ -1,10 +1,11 @@
 const { PrismaClient } = require("@prisma/client");
 const prisma = new PrismaClient();
 
-exports.getCompanyByID = async () => {
+
+export async function getCompanys() {
   try {
     return await prisma.company.findMany({});
   } catch (error) {
     console.log(error);
   }
-};
+}
