@@ -1,11 +1,12 @@
 const http = require("http");
-const routes = require("./routes/routes");
+import {Routes} from "./routes/routes"
 const httpPort = 80;
 
-let app = routes();
+let app = Routes();
 
 var httpServer = http.createServer(app);
 
 httpServer.listen(httpPort, () => {
   console.log("http://domain.name");
 });
+
