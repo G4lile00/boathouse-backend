@@ -1,6 +1,6 @@
 const http = require("http");
 import {Routes} from "./routes/routes"
-const httpPort = 80;
+const httpPort = 4000;
 
 let app = Routes();
 
