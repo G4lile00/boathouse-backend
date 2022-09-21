@@ -10,7 +10,7 @@ export async function getUser(req: LoginRequest): Promise<ResponseHttp> {
     if (!!req) {
        const user = await prisma.users.findFirst({
         where: {
-          ds_name: {
+          ds_email: {
             equals: req.login
           },
         }
@@ -33,8 +33,9 @@ export async function getUser(req: LoginRequest): Promise<ResponseHttp> {
     }
   } catch (error) {
     console.log(error);
+    return new ErrorRersponse(error);
   }
-  return new ErrorRersponse()
+  return new ErrorRersponse("Erro indefinido");
 }
 
 export async function createUser(req: LoginRequest): Promise<ResponseHttp> {
@@ -43,7 +44,8 @@ export async function createUser(req: LoginRequest): Promise<ResponseHttp> {
       const hashedPassword = await bcrypt.hash(req.password, 10)
       await prisma.users.create({
         data: {
-          ds_name : req.login, 
+          ds_email: req.login,
+          ds_name: req.name, 
           ds_password: hashedPassword,
           cd_company: 1,
           id_operator: true
@@ -55,7 +57,8 @@ export async function createUser(req: LoginRequest): Promise<ResponseHttp> {
       }
     }
     } catch (error) {
-      console.log(error);
+    console.log(error);
+    return new ErrorRersponse(error);
   }
-  return new ErrorRersponse();
+  return new ErrorRersponse("Erro indefinido");
   }

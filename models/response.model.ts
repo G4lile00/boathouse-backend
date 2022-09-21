@@ -6,8 +6,8 @@ export type ResponseHttp = {
 export class ErrorRersponse {
     public content: any
     public status: number
-    constructor() {
-        this.content = "Error";
+    constructor(error:any) {
+        this.content = error;
         this.status = 500
     }
 }

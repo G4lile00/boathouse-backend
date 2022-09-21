@@ -5,13 +5,13 @@ GET http://localhost:4000/company
 GET http://localhost:4000/users
 
 ###
-
+ 
 POST http://localhost:4000/user
 Content-Type: application/json
 
 {
-    "login":"teste",
-    "password":"teste"
+    "login":"vitinhomarcelo21@gmail.com",
+    "password":"WhiteF0x"
 }
 
 ###
@@ -19,8 +19,9 @@ post http://localhost:4000/usercreate
 Content-Type: application/json
 
 {
-    "login":"teste",
-    "password":"teste"
+    "name":"vitor",
+    "password":"WhiteF0x",
+    "login": "vitinhomarcelo21@gmail.com"
 }
 
 ###
