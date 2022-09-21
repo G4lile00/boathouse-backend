@@ -5,38 +5,6 @@ import { ErrorRersponse, ResponseHttp, UnauthorizedRersponse } from "../models/r
 const prisma = new PrismaClient();
 
 
-export async function getUser(req: LoginRequest): Promise<ResponseHttp> {
-  try {
-    if (!!req) {
-       const user = await prisma.users.findFirst({
-        where: {
-          ds_email: {
-            equals: req.login
-          },
-        }
-       });  
-      
-      if (!user) {
-        return {
-          content: "usuario nao encontrado",
-          status: 500
-        }
-      }
-      if (await bcrypt.compare(req.password, user.ds_password)) {
-        return {
-          content: user,
-          status: 200
-        }
-      } else {
-        return new UnauthorizedRersponse();
-      }
-    }
-  } catch (error) {
-    console.log(error);
-    return new ErrorRersponse(error);
-  }
-  return new ErrorRersponse("Erro indefinido");
-}
 
 export async function createUser(req: LoginRequest): Promise<ResponseHttp> {
   try {
@@ -47,7 +15,7 @@ export async function createUser(req: LoginRequest): Promise<ResponseHttp> {
           ds_email: req.login,
           ds_name: req.name, 
           ds_password: hashedPassword,
-          cd_company: 1,
+          cd_company: 2,
           id_operator: true
           }
       });  
