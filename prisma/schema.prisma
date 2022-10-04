@@ -8,17 +8,116 @@ datasource db {
 }
 
 model users {
-  id_user     Int     @id @default(autoincrement())
-  st_name     String? @db.VarChar
-  st_password String? @db.VarChar
-  cd_company  Int
-
-  Company company? @relation(fields: [cd_company], references: [id_company])
+  id_user         Int               @id @default(autoincrement())
+  cd_company      Int
+  ds_email        String            @db.VarChar
+  ds_name         String            @db.VarChar
+  ds_password     String            @db.VarChar
+  id_manager      Boolean           @default(false)
+  id_operational  Boolean           @default(false)
+  id_operator     Boolean           @default(false)
+  Company         company           @relation(fields: [cd_company], references: [id_company])
+  navagation_plan navagation_plan[]
 }
 
 model company {
-  id_company Int     @id @default(autoincrement())
-  st_name    String  @db.VarChar
-  st_cnpj    String  @db.VarChar
-  users      users[]
+  id_company      Int               @id @default(autoincrement())
+  ds_cnpj         String            @db.VarChar
+  ds_name         String            @db.VarChar
+  client          client[]
+  location        location[]
+  mariner         mariner[]
+  movimentation   movimentation[]
+  navagation_plan navagation_plan[]
+  ship            ship[]
+  users           users[]
+}
+
+model location {
+  id_location     Int               @id @default(autoincrement())
+  ds_location     String            @db.VarChar
+  cd_company      Int
+  Company         company           @relation(fields: [cd_company], references: [id_company])
+  navagation_plan navagation_plan[]
+}
+
+model move_status {
+  id_status       Int               @id @default(autoincrement())
+  ds_status       String            @db.VarChar
+  movimentation   movimentation[]
+  navagation_plan navagation_plan[]
+}
+
+model client {
+  id_client   Int           @id @default(autoincrement())
+  ds_name     String        @db.VarChar
+  ds_cpf      String        @db.VarChar
+  cd_company  Int
+  Company     company       @relation(fields: [cd_company], references: [id_company])
+  ship_client ship_client[]
+}
+
+model mariner {
+  id_mariner   Int            @id @default(autoincrement())
+  ds_name      String         @db.VarChar
+  ds_cpf       String         @db.VarChar
+  cd_company   Int
+  Company      company        @relation(fields: [cd_company], references: [id_company])
+  ship_mariner ship_mariner[]
+}
+
+model ship {
+  id_ship      Int            @id @default(autoincrement())
+  ds_ship      String         @db.VarChar
+  cd_company   Int
+  Company      company        @relation(fields: [cd_company], references: [id_company])
+  ship_client  ship_client[]
+  ship_mariner ship_mariner[]
+}
+
+model ship_mariner {
+  cd_ship            Int
+  cd_mariner         Int
+  id_cliente_mariner Int     @id @default(autoincrement())
+  Mariner            mariner @relation(fields: [cd_mariner], references: [id_mariner])
+  Ship               ship    @relation(fields: [cd_ship], references: [id_ship])
+}
+
+model ship_client {
+  cd_ship            Int
+  cd_client          Int
+  id_cliente_mariner Int    @id @default(autoincrement())
+  Client             client @relation(fields: [cd_client], references: [id_client])
+  Ship               ship   @relation(fields: [cd_ship], references: [id_ship])
+}
+
+model movimentation {
+  id_movimentation Int              @id @default(autoincrement())
+  cd_company       Int
+  dt_finished      DateTime?
+  dt_opned         DateTime         @default(now())
+  id_finished      Boolean          @default(false)
+  cd_move_status   Int
+  cd_nav_plan      Int?
+  Company          company          @relation(fields: [cd_company], references: [id_company])
+  move_staus       move_status      @relation(fields: [cd_move_status], references: [id_status])
+  navagation_plan  navagation_plan? @relation(fields: [cd_nav_plan], references: [id_nav_plan])
+}
+
+model navagation_plan {
+  qt_crew        Int
+  qt_passengers  Int
+  dt_departure   DateTime
+  dt_arrival     DateTime?
+  ds_observation String?         @db.VarChar
+  cd_destiny     Int
+  cd_user        Int
+  cd_company     Int
+  cd_move_status Int
+  id_nav_plan    Int             @id @default(autoincrement())
+  Company        company         @relation(fields: [cd_company], references: [id_company])
+  Location       location        @relation(fields: [cd_destiny], references: [id_location])
+  MoveStaus      move_status     @relation(fields: [cd_move_status], references: [id_status])
+  User           users           @relation(fields: [cd_user], references: [id_user])
+  movimentation  movimentation[]
 }
