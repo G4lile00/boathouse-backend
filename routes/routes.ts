@@ -1,14 +1,18 @@
 import express from "express";
+import cors from "cors";
+
 const app = express();
 
 import companyControler from "../controller/companyController";
-import userController from "../controller/userController"
-import loginController from "../controller/loginController"
+import userController from "../controller/userController";
+import loginController from "../controller/loginController";
 
 export function Routes() {
-  app.use(express.json())
+  app.use(cors());
+  app.use(express.json());
   app.use("/", companyControler);
   app.use("/", userController);
-  app.use("/", loginController)
+  app.use("/", loginController);
+
   return app;
 }
