@@ -1,17 +1,39 @@
 import express from "express";
-import { allUsers } from "../module/companyModule";
+import { getCompany } from "../module/companyModule";
 import { verifyToken } from "../service/JWTverify";
 const routes = express.Router();
-const  app = express(); 
-  
+const app = express();
 
-routes.get(["/allusers"],verifyToken, async (req: any, res: any) => {
-    let users = await allUsers(req.body);
-    res.status(users.status);
-    res.write(JSON.stringify(users.content))
-    res.end();
-
+//get company by company_id
+routes.get(["/getcompany"], verifyToken, async (req: any, res: any) => {
+  let users = await getCompany(req.body);
+  res.status(users.status);
+  res.write(JSON.stringify(users.content));
+  res.end();
+});
+// FUTURE ENDPOINT
+routes.get(["/createcompany"], verifyToken, async (req: any, res: any) => {
+  res.status(200);
+  res.write(JSON.stringify({ key: "wip" }));
+  res.end();
+});
+// FUTURE ENDPOINT
+routes.post(["/updatecompany"], verifyToken, async (req: any, res: any) => {
+  res.status(200);
+  res.write(JSON.stringify({ key: "wip" }));
+  res.end();
+});
+//FANTASY ENDPOINT
+routes.delete(["/deletecompany"], verifyToken, async (req: any, res: any) => {
+  res.status(200);
+  res.write(JSON.stringify({ key: "fantasty" }));
+  res.end();
 });
 
+//FANTASY ENDPOINT
+routes.get(["/getcompanys"], verifyToken, async (req: any, res: any) => {
+  res.status(200);
+  res.write(JSON.stringify({ key: "fantasty" }));
+  res.end();
+});
 export default routes;
-  
