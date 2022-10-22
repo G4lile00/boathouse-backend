@@ -10,4 +10,6 @@ export type UserInfo = {
   id_operator: boolean;
   id_operacional: boolean;
   id_manager: boolean;
+  user: number;
+  company:number;
 };

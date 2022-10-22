@@ -10,7 +10,7 @@ routes.get(["/getlocation"], verifyToken, async (req: any, res: any) => {
   res.end();
 });
 // FUTURE ENDPOINT
-routes.get(["/createlocation"], verifyToken, async (req: any, res: any) => {
+routes.put(["/createlocation"], verifyToken, async (req: any, res: any) => {
   res.status(200);
   res.write(JSON.stringify({ key: "wip" }));
   res.end();

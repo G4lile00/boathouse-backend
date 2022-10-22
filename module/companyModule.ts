@@ -8,7 +8,7 @@ export async function getCompany(req: any): Promise<ResponseHttp> {
     if (!!req.company) {
       const company = await prisma.company.findFirst({
         where: {
-          cd_company: {
+          id_company: {
             equals: req.company,
           },
         },
