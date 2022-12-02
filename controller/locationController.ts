@@ -31,7 +31,7 @@ routes.post(["/updatelocation"], verifyToken, async (req: any, res: any) => {
   res.end();
 });
 //FANTASY ENDPOINT
-routes.delete(["/deletelocation"], verifyToken, async (req: any, res: any) => {
+routes.post(["/deletelocation"], verifyToken, async (req: any, res: any) => {
   let users = await deleteLocation(req.body);
   res.status(users.status);
   res.write(JSON.stringify(users.content));
