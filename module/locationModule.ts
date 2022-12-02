@@ -95,7 +95,7 @@ export async function createLocation(req: any): Promise<ResponseHttp> {
         },
       });
       return {
-        content: location,
+        content: "location",
         status: 200,
       };
     }
