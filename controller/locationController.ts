@@ -10,7 +10,7 @@ import {
   deleteLocation,
 } from "../module/locationModule";
 // FUTURE ENDPOINT
-routes.get(["/getlocation"], verifyToken, async (req: any, res: any) => {
+routes.post(["/getlocation"], verifyToken, async (req: any, res: any) => {
   let users = await getLocation(req.body);
   res.status(users.status);
   res.write(JSON.stringify(users.content));
