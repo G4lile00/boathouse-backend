@@ -2,7 +2,7 @@ import { PrismaClient } from "@prisma/client";
 import { LoginRequest } from "../models/request.model";
 import { ErrorRersponse, ResponseHttp } from "../models/response.model";
 const prisma = new PrismaClient();
-
+// SELECT * FROM COMPANY WHERE id_company = req.company
 export async function getCompany(req: any): Promise<ResponseHttp> {
   try {
     if (!!req.company) {
