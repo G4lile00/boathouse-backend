@@ -8,6 +8,7 @@ import {
 } from "../models/response.model";
 const prisma = new PrismaClient();
 
+//select * from users where cd_comapany = req.company
 export async function getUsers(req: any): Promise<ResponseHttp> {
   try {
     if (!!req.company) {
@@ -29,7 +30,7 @@ export async function getUsers(req: any): Promise<ResponseHttp> {
   }
   return new ErrorRersponse("Erro indefinido");
 }
-
+// insert into user (ds_email, ds_name, ds_password, cd_comapany, id_operator) values (Valores AQUI)
 export async function createUser(req: LoginRequest): Promise<ResponseHttp> {
   try {
     if (!!req) {
@@ -54,7 +55,7 @@ export async function createUser(req: LoginRequest): Promise<ResponseHttp> {
   }
   return new ErrorRersponse("Erro indefinido");
 }
-
+// UPDATE USER SET ds_name = req.name, ds_password = SENHA
 export async function updateUser(req: UserInfo): Promise<ResponseHttp> {
   try {
     if (!!req) {
@@ -79,7 +80,7 @@ export async function updateUser(req: UserInfo): Promise<ResponseHttp> {
   }
   return new ErrorRersponse("Erro indefinido");
 }
-
+//DELETE FROM USER WHERE ID_USER = req.user
 export async function deleteUser(req: any): Promise<ResponseHttp> {
   try {
     if (!!req) {
