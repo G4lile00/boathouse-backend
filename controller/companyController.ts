@@ -15,7 +15,7 @@ routes.get(["/getcompany"], verifyToken, async (req: any, res: any) => {
 // FUTURE ENDPOINT
 routes.post(["/updatecompany"], verifyToken, async (req: any, res: any) => {
   res.status(200);
-  res.write(JSON.stringify({ key: "wip" }));
+  res.write(JSON.stringify({ key: "Atualizada com sucesso" }));
   res.end();
 });
 
